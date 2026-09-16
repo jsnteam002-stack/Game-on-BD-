@@ -1,0 +1,6 @@
+{
+  "name": "GAME ON BD",
+  "description": "Premium mobile-first free-to-play gaming platform featuring Western Slot, Lucky Wheel, Card Challenge, Treasure Box, and Number Rush with virtual coin economy, daily bonuses, leaderboards, and admin dashboard.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

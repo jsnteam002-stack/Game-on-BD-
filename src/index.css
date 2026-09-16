@@ -1,0 +1,185 @@
+@import "tailwindcss";
+
+@layer utilities {
+  .font-rye {
+    font-family: 'Rye', serif;
+  }
+  .font-cinzel {
+    font-family: 'Cinzel', serif;
+  }
+
+  /* Deep Saloon Dark Background */
+  .bg-casino-dark {
+    background-color: #050505;
+    background-image: 
+      radial-gradient(circle at 50% 0%, rgba(229, 185, 79, 0.12) 0%, rgba(18, 11, 7, 0.98) 75%),
+      radial-gradient(circle at 10% 90%, rgba(139, 23, 23, 0.15) 0%, transparent 50%),
+      linear-gradient(180deg, #0B0806 0%, #050505 100%);
+  }
+
+  /* Saloon Containers & Panels */
+  .casino-panel {
+    background: linear-gradient(180deg, #21140C 0%, #18100B 100%);
+    border: 1px solid #D8C59A;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8), inset 0 1px 1px rgba(255, 242, 204, 0.15);
+  }
+
+  /* Saloon Darker Inset Box */
+  .casino-inset {
+    background: linear-gradient(180deg, #0B0806 0%, #120B07 100%);
+    border: 1px solid rgba(216, 197, 154, 0.2);
+    box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.9);
+  }
+
+  /* Metallic Gold Border Glow */
+  .border-gold-glow {
+    border-color: #E5B94F;
+    box-shadow: 0 0 15px rgba(229, 185, 79, 0.35);
+  }
+
+  .border-crimson-glow {
+    border-color: #8B1717;
+    box-shadow: 0 0 15px rgba(139, 23, 23, 0.4);
+  }
+
+  /* Gold Metallic Text */
+  .text-gold-metallic {
+    background: linear-gradient(180deg, #FFD77A 0%, #E5B94F 50%, #C58A20 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.9));
+  }
+
+  /* Polished Dark Saloon Wood Panel for Western Slot */
+  .saloon-wood-panel {
+    background: linear-gradient(180deg, #21140C 0%, #18100B 40%, #0B0806 100%);
+    box-shadow: 
+      inset 0 1px 2px rgba(255, 242, 204, 0.15),
+      inset 0 -2px 5px rgba(0, 0, 0, 0.8),
+      0 10px 30px rgba(0, 0, 0, 0.9);
+    border: 2px solid #C58A20;
+  }
+
+  /* Metallic Brass Frame */
+  .brass-frame {
+    background: linear-gradient(135deg, #FFD77A 0%, #E5B94F 35%, #C58A20 70%, #8B1717 100%);
+    box-shadow: 
+      0 0 25px rgba(0, 0, 0, 0.95),
+      inset 0 2px 3px rgba(255, 255, 255, 0.6),
+      inset 0 -3px 6px rgba(0, 0, 0, 0.8);
+    border-radius: 1.5rem;
+    padding: 3px;
+  }
+
+  .brass-rivet {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%, #FFD77A 0%, #E5B94F 40%, #C58A20 85%, #18100B 100%);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.9), inset 0 1px 1px rgba(255,255,255,0.7);
+  }
+
+  /* Inset Physical Display Screen */
+  .display-panel-inset {
+    background: linear-gradient(180deg, #050505 0%, #120B07 100%);
+    box-shadow: 
+      inset 0 3px 8px rgba(0, 0, 0, 0.95),
+      inset 0 0 2px rgba(0, 0, 0, 0.8),
+      0 1px 0 rgba(255, 242, 204, 0.1);
+    border: 1px solid #C58A20;
+  }
+
+  /* 3D Metallic Gold Button */
+  .btn-gold-3d {
+    background: linear-gradient(180deg, #FFD77A 0%, #E5B94F 40%, #C58A20 100%);
+    box-shadow: 
+      0 4px 0 #7A4700,
+      0 6px 15px rgba(0, 0, 0, 0.6),
+      inset 0 2px 3px rgba(255, 255, 255, 0.8);
+    color: #120B07;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.4);
+    font-weight: 900;
+    transition: all 0.1s ease;
+  }
+  .btn-gold-3d:hover { filter: brightness(1.1); }
+  .btn-gold-3d:active {
+    transform: translateY(3px);
+    box-shadow: 0 1px 0 #7A4700, 0 2px 5px rgba(0, 0, 0, 0.4), inset 0 2px 4px rgba(0, 0, 0, 0.4);
+  }
+
+  /* Crimson Accent Button */
+  .btn-crimson-3d {
+    background: linear-gradient(180deg, #B91C1C 0%, #8B1717 50%, #580B0B 100%);
+    box-shadow: 0 4px 0 #3A0505, 0 8px 20px rgba(139, 23, 23, 0.5), inset 0 2px 3px rgba(255, 255, 255, 0.4);
+    color: #FFF2CC;
+    font-weight: 900;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.8);
+    transition: all 0.1s ease;
+  }
+  .btn-crimson-3d:hover { filter: brightness(1.15); }
+  .btn-crimson-3d:active {
+    transform: translateY(3px);
+    box-shadow: 0 1px 0 #3A0505, 0 2px 5px rgba(0, 0, 0, 0.4);
+  }
+
+  /* Physical Spin Button */
+  .btn-spin-3d {
+    background: radial-gradient(circle at 50% 30%, #FFD77A 0%, #E5B94F 35%, #C58A20 70%, #8B1717 100%);
+    box-shadow: 0 8px 0 #3A0505, 0 12px 25px rgba(0, 0, 0, 0.9), inset 0 3px 5px rgba(255, 255, 255, 0.8);
+    transition: all 0.1s ease;
+  }
+  .btn-spin-3d:hover { filter: brightness(1.15); }
+  .btn-spin-3d:active {
+    transform: translateY(6px);
+    box-shadow: 0 2px 0 #3A0505, 0 4px 10px rgba(0, 0, 0, 0.6), inset 0 4px 8px rgba(0, 0, 0, 0.6);
+  }
+
+  .btn-brass-sm {
+    background: linear-gradient(180deg, #21140C 0%, #18100B 100%);
+    border: 1px solid #D8C59A;
+    box-shadow: 0 2px 0 #050505, inset 0 1px 1px rgba(255, 242, 204, 0.15);
+    color: #D8C59A;
+  }
+  .btn-brass-sm:hover {
+    background: linear-gradient(180deg, #2A1B11 0%, #1F140D 100%);
+    color: #FFF2CC;
+  }
+}
+
+@keyframes spinReel {
+  0% { transform: translateY(0%); }
+  100% { transform: translateY(-50%); }
+}
+
+@keyframes reelStopBounce {
+  0% { transform: translateY(-12px); }
+  60% { transform: translateY(4px); }
+  80% { transform: translateY(-2px); }
+  100% { transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.98); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.animate-spin-reel { animation: spinReel 0.2s linear infinite; }
+.animate-reel-stop-bounce { animation: reelStopBounce 0.35s ease-out forwards; }
+.animate-fade-in { animation: fadeIn 0.25s ease-out forwards; }
+
+/* Custom scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #050505;
+}
+::-webkit-scrollbar-thumb {
+  background: #21140C;
+  border: 1px solid #C58A20;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #E5B94F;
+}
