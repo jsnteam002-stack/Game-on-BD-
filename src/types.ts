@@ -17,18 +17,54 @@ export type GameCategory = 'ALL' | 'SLOTS' | 'CRASH' | 'ROULETTE' | 'DICE' | 'CA
 
 export type UserRole = 'user' | 'admin';
 
+export type EWalletProvider = 'bKash' | 'Nagad' | 'Rocket' | 'Upay';
+
+export interface BoundWallet {
+  id: string;
+  provider: EWalletProvider;
+  accountNumber: string; // 11-digit Bangladeshi phone number (e.g. 01712345678)
+  accountType: 'Personal' | 'Agent';
+  isDefault: boolean;
+  boundAt: string;
+}
+
+export interface DepositRequest {
+  id: string;
+  userId: string;
+  provider: EWalletProvider;
+  amount: number;
+  bonusAmount: number;
+  senderPhone: string;
+  trxId: string;
+  status: 'PENDING' | 'APPROVED' | 'REJECTED';
+  timestamp: string;
+}
+
+export interface WithdrawRequest {
+  id: string;
+  userId: string;
+  provider: EWalletProvider;
+  amount: number;
+  fee: number;
+  receiverPhone: string;
+  accountType: 'Personal' | 'Agent';
+  status: 'PENDING' | 'PROCESSED' | 'REJECTED';
+  timestamp: string;
+}
+
 export interface UserProfile {
   id: string; // Auto-generated ID (e.g., GOBD-8F42K1)
   username: string;
   email: string;
   role: UserRole;
   isActive: boolean;
-  virtualCoins: number; // Main Virtual Coin Balance
+  virtualCoins: number; // Main Balance
   bonusCoins: number; // Promotional & Streak Bonus Coins
   xp: number;
   level: number;
-  vipTier: 'Saloon Novice' | 'Bronze Cowboy' | 'Silver Sheriff' | 'Gold Outlaw' | 'Diamond Legend';
+  vipTier: 'VIP 1' | 'VIP 2' | 'VIP 3' | 'VIP 4' | 'VIP 5' | 'VIP 6' | 'VIP 7' | 'VIP 8' | 'Diamond Legend' | 'Saloon Novice' | 'Bronze Cowboy' | 'Silver Sheriff' | 'Gold Outlaw';
   avatarUrl: string;
+  boundWallets?: BoundWallet[];
   totalGamesPlayed: number;
   totalWins: number;
   totalLosses: number;

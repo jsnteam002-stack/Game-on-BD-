@@ -156,6 +156,10 @@ class SoundManager {
     } catch {}
   }
 
+  public playCash() {
+    this.playCashoutChime();
+  }
+
   public playRocketRumble() {
     if (this.muted) return;
     this.initContext();

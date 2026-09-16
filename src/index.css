@@ -8,20 +8,115 @@
     font-family: 'Cinzel', serif;
   }
 
-  /* Deep Saloon Dark Background */
+  /* Deep Emerald Green #0B3C35 Casino Background */
   .bg-casino-dark {
-    background-color: #050505;
+    background-color: #041815;
     background-image: 
-      radial-gradient(circle at 50% 0%, rgba(229, 185, 79, 0.12) 0%, rgba(18, 11, 7, 0.98) 75%),
-      radial-gradient(circle at 10% 90%, rgba(139, 23, 23, 0.15) 0%, transparent 50%),
-      linear-gradient(180deg, #0B0806 0%, #050505 100%);
+      radial-gradient(circle at 50% 0%, rgba(16, 185, 129, 0.22) 0%, rgba(11, 60, 53, 0.95) 45%, #041815 100%),
+      radial-gradient(circle at 90% 80%, rgba(229, 185, 79, 0.12) 0%, transparent 45%),
+      linear-gradient(180deg, #072B26 0%, #041815 100%);
   }
 
-  /* Saloon Containers & Panels */
+  /* Deep Emerald Casino Panels */
+  .emerald-panel {
+    background: linear-gradient(180deg, #0E4B43 0%, #0B3C35 45%, #072924 100%);
+    border: 1px solid rgba(229, 185, 79, 0.4);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7), inset 0 1px 1px rgba(255, 242, 204, 0.25);
+  }
+
+  .emerald-card {
+    background: linear-gradient(180deg, #09342E 0%, #062420 100%);
+    border: 1px solid rgba(229, 185, 79, 0.35);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  }
+
+  .emerald-inset {
+    background: linear-gradient(180deg, #041714 0%, #072420 100%);
+    border: 1px solid rgba(229, 185, 79, 0.25);
+    box-shadow: inset 0 3px 8px rgba(0, 0, 0, 0.95);
+  }
+
+  /* Saloon Containers & Panels (Backward Compatibility) */
   .casino-panel {
-    background: linear-gradient(180deg, #21140C 0%, #18100B 100%);
+    background: linear-gradient(180deg, #0E4B43 0%, #0B3C35 100%);
     border: 1px solid #D8C59A;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8), inset 0 1px 1px rgba(255, 242, 204, 0.15);
+  }
+
+  /* Glossy 3D Emerald Button */
+  .btn-emerald-glossy-3d {
+    background: linear-gradient(180deg, #10B981 0%, #059669 40%, #047857 70%, #064E3B 100%);
+    box-shadow: 
+      0 4px 0 #022C22,
+      0 6px 15px rgba(0, 0, 0, 0.6),
+      inset 0 2px 3px rgba(255, 255, 255, 0.7);
+    color: #FFFFFF;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+    font-weight: 800;
+    transition: all 0.12s ease;
+  }
+  .btn-emerald-glossy-3d:hover {
+    filter: brightness(1.12);
+  }
+  .btn-emerald-glossy-3d:active {
+    transform: translateY(3px);
+    box-shadow: 0 1px 0 #022C22, 0 2px 6px rgba(0, 0, 0, 0.5), inset 0 2px 4px rgba(0, 0, 0, 0.4);
+  }
+
+  /* Glossy 3D Gold Accent Button */
+  .btn-gold-glossy-3d {
+    background: linear-gradient(180deg, #FFF099 0%, #FFD700 35%, #E5B94F 65%, #C58A20 100%);
+    box-shadow: 
+      0 4px 0 #634303,
+      0 6px 16px rgba(0, 0, 0, 0.6),
+      inset 0 2px 3px rgba(255, 255, 255, 0.85);
+    color: #1A1005;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.4);
+    font-weight: 900;
+    transition: all 0.12s ease;
+  }
+  .btn-gold-glossy-3d:hover {
+    filter: brightness(1.1);
+  }
+  .btn-gold-glossy-3d:active {
+    transform: translateY(3px);
+    box-shadow: 0 1px 0 #634303, 0 2px 6px rgba(0, 0, 0, 0.5), inset 0 2px 4px rgba(0, 0, 0, 0.4);
+  }
+
+  /* Glossy 3D bKash Brand Button */
+  .btn-bkash-3d {
+    background: linear-gradient(180deg, #FF2E88 0%, #E2136E 45%, #B30C54 100%);
+    box-shadow: 0 4px 0 #6B0030, 0 6px 15px rgba(226, 19, 110, 0.4), inset 0 2px 2px rgba(255, 255, 255, 0.6);
+    color: #FFFFFF;
+    font-weight: 800;
+    transition: all 0.12s ease;
+  }
+  .btn-bkash-3d:hover { filter: brightness(1.1); }
+  .btn-bkash-3d:active {
+    transform: translateY(3px);
+    box-shadow: 0 1px 0 #6B0030, 0 2px 4px rgba(0, 0, 0, 0.5);
+  }
+
+  /* Glossy 3D Nagad Brand Button */
+  .btn-nagad-3d {
+    background: linear-gradient(180deg, #FFA94D 0%, #F7941D 45%, #C26B0A 100%);
+    box-shadow: 0 4px 0 #7A3F00, 0 6px 15px rgba(247, 148, 29, 0.4), inset 0 2px 2px rgba(255, 255, 255, 0.6);
+    color: #FFFFFF;
+    font-weight: 800;
+    transition: all 0.12s ease;
+  }
+  .btn-nagad-3d:hover { filter: brightness(1.1); }
+  .btn-nagad-3d:active {
+    transform: translateY(3px);
+    box-shadow: 0 1px 0 #7A3F00, 0 2px 4px rgba(0, 0, 0, 0.5);
+  }
+
+  /* VIP Glowing Badge */
+  .vip-badge {
+    background: linear-gradient(135deg, #FFE680 0%, #FFD700 35%, #D4AF37 70%, #996515 100%);
+    border: 1px solid #FFF5C0;
+    box-shadow: 0 0 12px rgba(255, 215, 0, 0.4), inset 0 1px 2px rgba(255, 255, 255, 0.9);
+    color: #1D1305;
   }
 
   /* Saloon Darker Inset Box */

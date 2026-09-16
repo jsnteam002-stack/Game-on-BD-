@@ -10,7 +10,9 @@ import {
   CoinHistoryItem,
   CalculationOutcome,
   WesternSymbolId,
-  WesternSymbolDef
+  WesternSymbolDef,
+  BoundWallet,
+  EWalletProvider,
 } from '../types';
 
 export const WESTERN_SYMBOLS: Record<WesternSymbolId, WesternSymbolDef> = {
@@ -615,6 +617,132 @@ class Store {
 
     this.addNotification('Game Rules Updated', `Slot win probability set to ${(winProbability * 100).toFixed(0)}%`, 'info');
     this.notify();
+  }
+
+  // E-Wallet & Payment Management
+  public getBoundWallets(): BoundWallet[] {
+    if (!this.user.boundWallets || this.user.boundWallets.length === 0) {
+      this.user.boundWallets = [
+        {
+          id: 'w_bkash_default',
+          provider: 'bKash',
+          accountNumber: '01798123456',
+          accountType: 'Personal',
+          isDefault: true,
+          boundAt: '2026-02-01',
+        },
+        {
+          id: 'w_nagad_default',
+          provider: 'Nagad',
+          accountNumber: '01855654321',
+          accountType: 'Personal',
+          isDefault: false,
+          boundAt: '2026-02-10',
+        },
+      ];
+      this.notify();
+    }
+    return this.user.boundWallets;
+  }
+
+  public bindWallet(provider: EWalletProvider, accountNumber: string, accountType: 'Personal' | 'Agent'): { success: boolean; message: string } {
+    const cleanPhone = accountNumber.trim().replace(/\D/g, '');
+    if (!/^01[3-9]\d{8}$/.test(cleanPhone)) {
+      this.addNotification('Invalid Phone Number', 'Please enter a valid 11-digit Bangladeshi mobile number starting with 01.', 'info');
+      return { success: false, message: 'Invalid 11-digit Bangladeshi mobile number.' };
+    }
+
+    if (!this.user.boundWallets) {
+      this.user.boundWallets = [];
+    }
+
+    // Check if already bound
+    const existingIndex = this.user.boundWallets.findIndex(
+      (w) => w.provider === provider && w.accountNumber === cleanPhone
+    );
+
+    if (existingIndex >= 0) {
+      this.user.boundWallets[existingIndex].accountType = accountType;
+    } else {
+      this.user.boundWallets.push({
+        id: 'w_' + Date.now(),
+        provider,
+        accountNumber: cleanPhone,
+        accountType,
+        isDefault: this.user.boundWallets.length === 0,
+        boundAt: new Date().toISOString().split('T')[0],
+      });
+    }
+
+    this.addNotification('E-Wallet Bound Successfully', `${provider} account ${cleanPhone} (${accountType}) is now connected.`, 'bonus');
+    this.notify();
+    return { success: true, message: `${provider} account ${cleanPhone} bound successfully.` };
+  }
+
+  public submitDeposit(provider: EWalletProvider, amount: number, senderPhone: string, trxId: string): { success: boolean; message: string; newBalance: number } {
+    if (amount < 100) {
+      return { success: false, message: 'Minimum deposit amount is ৳100', newBalance: this.user.virtualCoins };
+    }
+    const cleanTrx = trxId.trim().toUpperCase();
+    if (!cleanTrx || cleanTrx.length < 6) {
+      return { success: false, message: 'Please provide a valid Transaction ID (TrxID)', newBalance: this.user.virtualCoins };
+    }
+
+    // 10% First/Deposit bonus calculation
+    const bonusAmount = Math.round(amount * 0.1);
+    const totalCredit = amount + bonusAmount;
+
+    this.user.virtualCoins += totalCredit;
+    this.user.bonusCoins += bonusAmount;
+
+    this.coinHistory.unshift({
+      id: 'dep_' + Date.now(),
+      type: 'ADMIN_ADJUST',
+      amount: totalCredit,
+      description: `E-Wallet Deposit via ${provider} (TrxID: ${cleanTrx}) + ৳${bonusAmount} Bonus`,
+      timestamp: 'Just now',
+    });
+
+    this.addNotification(
+      'Deposit Successful!',
+      `Credited ৳${amount.toLocaleString()} + ৳${bonusAmount.toLocaleString()} bonus via ${provider}!`,
+      'win'
+    );
+    this.notify();
+
+    return { success: true, message: `Deposit of ৳${amount.toLocaleString()} processed!`, newBalance: this.user.virtualCoins };
+  }
+
+  public submitWithdraw(provider: EWalletProvider, amount: number, receiverPhone: string, accountType: 'Personal' | 'Agent'): { success: boolean; message: string; newBalance: number } {
+    if (amount < 200) {
+      return { success: false, message: 'Minimum withdrawal amount is ৳200', newBalance: this.user.virtualCoins };
+    }
+    if (amount > this.user.virtualCoins) {
+      return { success: false, message: 'Insufficient balance for this withdrawal request.', newBalance: this.user.virtualCoins };
+    }
+    const cleanPhone = receiverPhone.trim().replace(/\D/g, '');
+    if (!/^01[3-9]\d{8}$/.test(cleanPhone)) {
+      return { success: false, message: 'Please enter a valid 11-digit Bangladeshi mobile number.', newBalance: this.user.virtualCoins };
+    }
+
+    this.user.virtualCoins -= amount;
+
+    this.coinHistory.unshift({
+      id: 'wdr_' + Date.now(),
+      type: 'GAME_BET',
+      amount: -amount,
+      description: `Withdrawal Request to ${provider} (${cleanPhone}) - 0% Fee`,
+      timestamp: 'Just now',
+    });
+
+    this.addNotification(
+      'Withdrawal Requested',
+      `৳${amount.toLocaleString()} withdrawal submitted to ${provider} account ${cleanPhone}. Instant processing.`,
+      'info'
+    );
+    this.notify();
+
+    return { success: true, message: `Withdrawal of ৳${amount.toLocaleString()} requested successfully!`, newBalance: this.user.virtualCoins };
   }
 
   public markNotificationsRead() {

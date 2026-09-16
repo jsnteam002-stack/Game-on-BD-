@@ -6,6 +6,8 @@ import { BottomNav } from './components/BottomNav';
 import { ToastContainer } from './components/ToastContainer';
 import { NotificationsModal } from './components/NotificationsModal';
 import { FaucetModal } from './components/FaucetModal';
+import { DepositModal } from './components/DepositModal';
+import { WithdrawModal } from './components/WithdrawModal';
 
 // Views
 import { HomeView } from './views/HomeView';
@@ -28,6 +30,8 @@ export const App: React.FC = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [notifModalOpen, setNotifModalOpen] = useState(false);
   const [faucetModalOpen, setFaucetModalOpen] = useState(false);
+  const [depositModalOpen, setDepositModalOpen] = useState(false);
+  const [withdrawModalOpen, setWithdrawModalOpen] = useState(false);
 
   useEffect(() => {
     return store.subscribe(() => setTick((t) => t + 1));
@@ -77,7 +81,8 @@ export const App: React.FC = () => {
       <Header
         onOpenSidebar={() => setSidebarOpen(true)}
         onOpenNotifications={() => setNotifModalOpen(true)}
-        onOpenFaucetModal={() => setFaucetModalOpen(true)}
+        onOpenDeposit={() => setDepositModalOpen(true)}
+        onOpenWithdraw={() => setWithdrawModalOpen(true)}
       />
 
       {/* Drawer Sidebar */}
@@ -86,6 +91,8 @@ export const App: React.FC = () => {
       {/* Modals */}
       <NotificationsModal isOpen={notifModalOpen} onClose={() => setNotifModalOpen(false)} />
       <FaucetModal isOpen={faucetModalOpen} onClose={() => setFaucetModalOpen(false)} />
+      <DepositModal isOpen={depositModalOpen} onClose={() => setDepositModalOpen(false)} />
+      <WithdrawModal isOpen={withdrawModalOpen} onClose={() => setWithdrawModalOpen(false)} />
 
       {/* Main View Container */}
       <main className="flex-1 w-full max-w-7xl mx-auto py-2 sm:py-4">
